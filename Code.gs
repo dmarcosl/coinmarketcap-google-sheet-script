@@ -66,7 +66,11 @@ function update_coin_market_call_prices() {
       var formula = formulas[row][col];
       if (formula && formula.indexOf("CMCPRICE") > -1) {
         let value = formula.slice(formula.indexOf("CMCPRICE"));
-        value = value.slice(value.indexOf("(") + 2, value.indexOf(")") - 1);
+        if (value.indexOf(",") != -1) {
+          value = value.slice(value.indexOf("(") + 2, value.indexOf(",") - 1);
+        } else {
+          value = value.slice(value.indexOf("(") + 2, value.indexOf(")") - 1);
+        }
         
         if (!symbol_positions[value]) {
           symbol_positions[value] = []
