@@ -24,7 +24,7 @@ function _call_coin_market_call_prices(symbols) {
   const API_KEY = 'You Api-Key goes here';
   const CURRENCY = "USD";
   
-  const url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?convert=" + CURRENCY + "&symbol=" + symbols.toString();
+  const url = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?convert=" + CURRENCY + "&symbol=" + symbols.toString();
   let options = {
     "method": "GET",
     "contentType": "application/json",
@@ -41,7 +41,7 @@ function _call_coin_market_call_prices(symbols) {
   let prices = {};
   
   for (const symbol of symbols) {
-    prices[symbol] = response_json.data[symbol].quote[CURRENCY].price;
+    prices[symbol] = response_json.data[symbol][0].quote[CURRENCY].price;
   }
   return prices;
 }
